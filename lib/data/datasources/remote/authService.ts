@@ -7,22 +7,19 @@ export async function googleSignIn() {
     const userInfo = await GoogleSignin.signIn();
     return userInfo;
   } catch (error) {
-    if (isErrorWithCode(error)) {
+    if (error instanceof Error && isErrorWithCode(error)) {
       switch (error.code) {
         case statusCodes.SIGN_IN_CANCELLED:
-          new AuthenticationError("AuthService - Login Cancelled");
-          break;
+          throw new AuthenticationError("AuthService - Login Cancelled");
         case statusCodes.IN_PROGRESS:
-          new AuthenticationError("AuthService - Login in progress");
-          break;
+          throw new AuthenticationError("AuthService - Login in progress");
         case statusCodes.PLAY_SERVICES_NOT_AVAILABLE:
-          new AuthenticationError("AuthService - Play services not available");
-          break;
+          throw new AuthenticationError("AuthService - Play services not available");
         default:
-          new AuthenticationError("AuthService - An unknown error occurred");
+          throw new AuthenticationError("AuthService - An unknown error occurred");
       }
     } else {
-      new AuthenticationError(`AuthService - ${error}`);
+      throw new AuthenticationError(`AuthService - ${error}`);
     }
   }
 }
@@ -30,7 +27,6 @@ export async function googleSignIn() {
 export async function googleSignOut() {
   try {
     await GoogleSignin.signOut();
-    console.log("logout sukses");
   } catch (error) {
     throw new AuthenticationError("An error occurred during sign out");
   }

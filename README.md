@@ -16,6 +16,19 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
     npx expo start
    ```
 
+## Commit message
+
+```bash
+   feat: implement new payment gateway integration
+   fix: correct typo in user settings page
+   docs: update API documentation for user endpoint
+   style: reformat code with prettier
+   refactor: improve data processing logic for scalability
+   test: add unit tests for authentication module
+   chore: update dependency versions to latest stable releases
+
+```
+
 In the output, you'll find options to open the app in a
 
 - [development build](https://docs.expo.dev/develop/development-builds/introduction/)
