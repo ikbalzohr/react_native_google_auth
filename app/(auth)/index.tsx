@@ -1,25 +1,35 @@
-import React, { useEffect } from "react";
-import { View, Text, Button, Alert } from "react-native";
-// import { useAuthStore } from "@/lib/store/authStore";
-import { Link } from "expo-router";
+import React from "react";
+import { View, Text, TouchableOpacity } from "react-native";
+import { useAuthStore } from "@/lib/store/authStore";
 import { styled } from "nativewind";
 
 const StyledView = styled(View);
 const StyledText = styled(Text);
 
 const LoginScreen: React.FC = () => {
-  // const { loginWithGoogle, signOut } = useAuthStore();
+  const { loginWithGoogle, signOut } = useAuthStore();
 
   return (
-    <StyledView className="bg-blue-500" style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Login Screen</Text>
-      <Button title="Login with Google" onPress={() => {}} />
-      <View style={{ marginTop: 20 }} />
-      <Button title="Logout" onPress={() => {}} />
-      <View style={{ marginTop: 20 }} />
-      <Link href="/home">
-        <StyledText className="text-blue-600">Home</StyledText>
-      </Link>
+    <StyledView className="items-center justify-center flex-1 }" style={{ backgroundColor: "black" }}>
+      <StyledText className="text-3xl" style={{ color: "white" }}>
+        Login Screen
+      </StyledText>
+      <TouchableOpacity className="p-3 mt-10 bg-white rounded-xl " onPress={() => loginWithGoogle()}>
+        <Text>Login with Google</Text>
+      </TouchableOpacity>
+      <TouchableOpacity className="p-3 mt-10 bg-white rounded-xl " onPress={signOut}>
+        <Text>Logout</Text>
+      </TouchableOpacity>
+      <TouchableOpacity>
+        <Text
+          style={{ color: "white" }}
+          onPress={() => {
+            console.log("first");
+          }}
+        >
+          Forgot Password
+        </Text>
+      </TouchableOpacity>
     </StyledView>
   );
 };

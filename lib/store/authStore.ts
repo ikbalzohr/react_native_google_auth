@@ -3,6 +3,7 @@ import { LoginWithGoogleUseCase } from "@/lib/domain/usecases/loginWithGoogleUse
 import { SignOutUseCase } from "@/lib/domain/usecases/signOutUseCase";
 import { AuthRepositoryImplement } from "@/lib/data/repositories/authRepositoryImplement";
 import { AuthStateType } from "@/lib/types/authTypes";
+import { router } from "expo-router";
 
 const authRepository = new AuthRepositoryImplement();
 
@@ -17,13 +18,15 @@ export const useAuthStore = create<AuthStateType>((set) => ({
       console.error(error);
     } else {
       const user = result.right;
-      console.log("authStore", user);
       set({ user });
+      console.log("authStore", user);
+      router.push("/home");
     }
   },
   signOut: async () => {
     const signOutUseCase = new SignOutUseCase(authRepository);
     await signOutUseCase.execute();
     set({ user: null });
+    console.log("Logout success");
   },
 }));
