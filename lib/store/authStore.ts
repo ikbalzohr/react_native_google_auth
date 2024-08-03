@@ -20,7 +20,7 @@ export const useAuthStore = create<AuthStateType>((set) => ({
       const user = result.right;
       set({ user });
       console.log("authStore", user);
-      router.push("/home");
+      router.push("/welcome");
     }
   },
   signOut: async () => {

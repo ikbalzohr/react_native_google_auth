@@ -20,16 +20,6 @@ const LoginScreen: React.FC = () => {
       <TouchableOpacity className="p-3 mt-10 bg-white rounded-xl " onPress={signOut}>
         <Text>Logout</Text>
       </TouchableOpacity>
-      <TouchableOpacity>
-        <Text
-          style={{ color: "white" }}
-          onPress={() => {
-            console.log("first");
-          }}
-        >
-          Forgot Password
-        </Text>
-      </TouchableOpacity>
     </StyledView>
   );
 };
