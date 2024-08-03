@@ -1,8 +1,8 @@
 import { DarkTheme, DefaultTheme, ThemeProvider } from "@react-navigation/native";
 import { useFonts } from "expo-font";
-import { Stack } from "expo-router";
+import { Redirect, router, Slot, Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "react-native-reanimated";
 
 import { useColorScheme } from "@/hooks/useColorScheme";
@@ -11,7 +11,7 @@ import { GoogleSignin } from "@react-native-google-signin/google-signin";
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
-export default function RootLayout() {
+const RootLayout = () => {
   const colorScheme = useColorScheme();
   const [loaded] = useFonts({
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
@@ -19,12 +19,13 @@ export default function RootLayout() {
 
   useEffect(() => {
     if (loaded) {
-      SplashScreen.hideAsync();
-    }
+      // router.replace("/(tabs)/home");
+      setTimeout(() => {
+        SplashScreen.hideAsync();
+      }, 500);
 
-    GoogleSignin.configure({
-      //   scopes: ["profile", "email"],
-    });
+      GoogleSignin.configure();
+    }
   }, [loaded]);
 
   if (!loaded) {
@@ -40,4 +41,8 @@ export default function RootLayout() {
       </Stack>
     </ThemeProvider>
   );
+};
+
+export default function RootLayoutNav() {
+  return <RootLayout />;
 }
